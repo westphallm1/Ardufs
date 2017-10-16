@@ -1,9 +1,9 @@
 #ifndef InputListener_h
 #define InputListener_h
 #include<Arduino.h>
-#define MAX_IN_BUFFER 128
-#define MAX_ARGS 32
-#define MAX_SEPS 10
+#define MAX_IN_BUFFER 64
+#define MAX_ARGS 8
+#define MAX_SEPS 4
 
 class InputListener {
   public:

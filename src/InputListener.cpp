@@ -45,7 +45,7 @@ int InputListener::getCommandArgs(char *argv[]){
     return 1;
   }
   int i=0;
-  //one liner to strtok_r the whole string 
+  //one liner to strtok_r the whole string
   char * save;
   while((argv[i++] = strtok_r((i==1)?_in_buffr:NULL," ",&save))!=NULL);
 

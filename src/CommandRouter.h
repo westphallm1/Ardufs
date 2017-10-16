@@ -1,13 +1,13 @@
 #ifndef CommandRouter_h
 #define CommandRouter_h
 #include<Arduino.h>
-#include "FileSystem.h"
+#include "FileNavigator.h"
 class CommandRouter {
   public:
-    CommandRouter(FileSystem * fs);
+    CommandRouter(FileNavigator * fn);
     void route(char *args[]);
   private:
-    FileSystem * _fs;
+    FileNavigator * _fn;
 
 };
 
