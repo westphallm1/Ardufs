@@ -1,6 +1,6 @@
 #ifndef FileNavigator_h
 #define FileNavigator_h
-#include<Arduino.h>
+#include <Arduino.h>
 #include <SPI.h>
 #include <SD.h>
 #define MAX_BUFFER 64
@@ -25,6 +25,7 @@ class FileNavigator {
     void pwd(char * argv[]);
     void mkdir(char * argv[]);
     void rmdir(char * argv[]);
+    void cat(char * argv[]);
   private:
     int _has_cached_dirs;
     char _working_dir[MAX_BUFFER];
@@ -32,7 +33,9 @@ class FileNavigator {
     void _print_files_in(File * dir_f);
     void _walk_back_path(int * end_idx);
     int _is_valid_path(char * dir);
-    void _resolve_relative_path(char * path);
+    void _resolve_relative_path(char * path, int isDirectory);
+    void _cat_to_file(char * fname);
+    void _cat_from_file(char * fname);
 };
 
 
