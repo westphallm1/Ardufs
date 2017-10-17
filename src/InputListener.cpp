@@ -39,6 +39,15 @@ void InputListener::getNewCommand(){
   _curr_char = 0;
 }
 
+int InputListener::getCommandRaw(char ** text){
+  if(!_has_new_line){
+    //we didn't fill argv
+    return 1;
+  }
+  *text = _in_buffr;
+  _has_new_line=0;
+  return 0;
+};
 int InputListener::getCommandArgs(char *argv[]){
   if(!_has_new_line){
     //we didn't fill argv

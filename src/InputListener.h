@@ -13,6 +13,7 @@ class InputListener {
     int hasNewCommand();
     void getNewCommand();
     int getCommandArgs(char * argv[]);
+    int getCommandRaw(char ** text);
   private:
     char _sep[MAX_SEPS];
     char _in_buffr[MAX_IN_BUFFER];
