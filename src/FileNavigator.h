@@ -22,6 +22,7 @@ class FileNavigator {
     void rmdir(char * argv[]);
     void cat(char * argv[]);
     void rm(char * argv[]);
+    void send(char * argv[]);
     void cache(file_navigator_cache * cache);
     char * workingDir();
     static void resolveRelativePath(char * current, char * change,

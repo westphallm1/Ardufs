@@ -48,7 +48,7 @@ int InputListener::getCommandRaw(char ** text){
   _has_new_line=0;
   return 0;
 };
-int InputListener::getCommandArgs(char *argv[]){
+int InputListener::getCommandArgs(int * argc, char *argv[]){
   if(!_has_new_line){
     //we didn't fill argv
     return 1;
@@ -57,7 +57,7 @@ int InputListener::getCommandArgs(char *argv[]){
   //one liner to strtok_r the whole string
   char * save;
   while((argv[i++] = strtok_r((i==1)?_in_buffr:NULL," ",&save))!=NULL);
-
+  *argc = i-1;
   _has_new_line=0;
   return 0;
 }

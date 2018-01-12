@@ -9,8 +9,9 @@ CommandRouter::CommandRouter(){
 void CommandRouter::route(InputListener * listener){
   char * args[10];
   char * text;
+  int narg;
   if(mode==SHELL){
-    listener->getCommandArgs(args);
+    listener->getCommandArgs(&narg,args);
     //ignore empty input
     if(args[0][0]=='\0'){
       return;
@@ -29,8 +30,16 @@ void CommandRouter::route(InputListener * listener){
       _fn->rmdir(args);
     }else if(!strcmp(args[0],"rm")){
       _fn->rm(args);
+    }else if(!strcmp(args[0],"send")){
+      if(narg<2){
+        Serial.println("Usage: send <filename>");
+      }else{
+        _fn->send(args);
+      }
     }else if(!strcmp(args[0],"cat")){
-      if(!strcmp(args[1],">")){
+      if(narg<2){
+        Serial.println("Usage: cat <filename>");
+      }else if(!strcmp(args[1],">")){
         //this is a bit ugly
         char new_path[64];
         FileNavigator::resolveRelativePath(_fn->workingDir(),args[2],new_path,0);

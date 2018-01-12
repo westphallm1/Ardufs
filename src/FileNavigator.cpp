@@ -88,9 +88,39 @@ void FileNavigator::rmdir(char * argv[]){
  * or write to a file ($ cat > fname)
  */
 void FileNavigator::cat(char * argv[]){
-    _cat_from_file(argv[1]);
+  _cat_from_file(argv[1]);
 }
 
+/*  Transfer a file according to the format
+ *  <Header Message> OK <File Content> OK <Footer Message>
+ */
+void FileNavigator::send(char * argv[]){
+
+  char * fname = argv[1];
+  resolveRelativePath(_working_dir,fname,_staged_dir,0);
+  File toSend = SD.open(_staged_dir);
+  if(toSend){
+    //succcess header
+    Serial.print("Sending file ");
+    Serial.print(argv[1]);
+    Serial.print(" (");
+    Serial.print(toSend.size());
+    Serial.print(" bytes)\nOK");
+    toSend.close();
+    //send the file itself
+    _cat_from_file(argv[1]);
+    //anything footer comes after this
+    Serial.print("OK");
+  }else{
+    //failure header
+    Serial.print("Couldn't open file ");
+    Serial.println(fname);
+    //empty file content
+    Serial.print("OKOK");
+    toSend.close();
+  }
+
+}
 /*
  * Remove a file
 */
